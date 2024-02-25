@@ -24,10 +24,31 @@ const Login = () => {
           sm={8}
           md={5}>
           <Typography component="h1" variant='h4' sx={{ textAlign: 'center' }}>SIGN IN</Typography>
-          <TextField margin='normal' value={state.email} onChange={e=>onInpF('email',e.target.value)} required fullWidth id="email" name="email" label="Email address or Username" />
-          <TextField margin='normal'  value={state.password} onChange={e=>onInpF('password',e.target.value)} required fullWidth id="password" name="password" type='password' label="Password" />
+          <TextField 
+          helperText={state.wrongInputs.indexOf('username') !== -1?"Please write your email or username.":false}
+          error={state.wrongInputs.indexOf('username') !== -1}
+          margin='normal'
+          value={state.username} 
+          onChange={e=>onInpF('username',e.target.value)} 
+          required 
+          fullWidth 
+          id="username" 
+          name="username" 
+          label="Email address or Username" />
+          <TextField
+          helperText={state.wrongInputs.indexOf('password') !== -1?"Password has to contain at least 8 character.":false}
+          error={state.wrongInputs.indexOf('password') !== -1}
+          margin='normal' 
+          value={state.password} 
+          onChange={e=>onInpF('password',e.target.value)} 
+          required 
+          fullWidth 
+          id="password" 
+          name="password" 
+          type='password' 
+          label="Password" />
           <FormControlLabel control={<Checkbox checked={state.rememberme}  onChange={e=>onInpF('rememberme',!state.rememberme)} value="remember" color="primary" />} label="Remember me" />
-          <Button variant="contained" color="primary" fullWidth sx={{ mt: 3, mb: 2 }}>
+          <Button disabled={!state.isReady} variant="contained" color="primary" fullWidth sx={{ mt: 3, mb: 2 }}>
             Sign In
           </Button>
           <Grid container justifyContent="space-between" spacing={4}>
